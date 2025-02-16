@@ -23,7 +23,7 @@ class SimpleBlackjackPolicy(object):
         """
         # YOUR CODE HERE
         probs = np.zeros(len(actions))
-        for s in states:            
+        for s in enumerate(states):            
             for a  in actions: 
                 # If >= 20, stick
                 if a == 0 and s[0] >= 20:
@@ -194,8 +194,8 @@ def mc_importance_sampling(behavior_policy, target_policy, env, num_episodes, di
             G = discount_factor*G + rewards[t]
             returns_count[states[t]] += W
             V[states[t]] += (W / returns_count[states[t]]) * (G - V[states[t]])
-            if actions[t] != target_policy.sample_action(states[t]):
-                break
+            # if actions[t] != target_policy.sample_action(states[t]):
+            #     break
             target_probs = target_policy.get_probs([states[t]], [0,1])
             behavior_probs = behavior_policy.get_probs([states[t]], [0,1])
             # print(target_probs, behavior_probs, actions[t])
