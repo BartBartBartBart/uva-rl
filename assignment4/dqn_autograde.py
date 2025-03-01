@@ -47,10 +47,6 @@ def get_epsilon(it):
     epsilon = max(1.0 - (it / 1000) * (1.0 - 0.05), 0.05)
     return epsilon
 
-print(get_epsilon(1000))
-print(get_epsilon(500))
-print(get_epsilon(0))
-
 class EpsilonGreedyPolicy(object):
     """
     A simple epsilon greedy policy.
@@ -171,12 +167,15 @@ def run_episodes(train, Q, policy, memory, env, num_episodes, batch_size, discou
         while True:
             
             # YOUR CODE HERE
+            epsilon = get_epsilon(global_steps)
+            policy.set_epsilon(epsilon)
             action = policy.sample_action(state)
             next_state, reward, done, _ = env.step(action)
             memory.push((state, action, reward, next_state, done))
             train(Q, memory, optimizer, batch_size, discount_factor)
             state = next_state
             steps += 1
+            global_steps += 1
             
             if done:
                 if i % 10 == 0:
