@@ -44,10 +44,7 @@ class ReplayMemory:
 def get_epsilon(it):
     
     # YOUR CODE HERE
-    if it < 1000:
-        epsilon = 1 - it * (0.9 / 1000)
-    else:
-        epsilon = 0.05 
+    epsilon = max(1.0 - (it / 1000) * (1.0 - 0.05), 0.05)
     return epsilon
 
 print(get_epsilon(1000))
