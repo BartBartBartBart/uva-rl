@@ -31,8 +31,9 @@ class ReplayMemory:
 
     def push(self, transition):
         # YOUR CODE HERE
-        if len(self.memory) < self.capacity:
-            self.memory.append(transition)
+        if len(self.memory) >= self.capacity:
+            self.memory.pop(0)
+        self.memory.append(transition)
 
     def sample(self, batch_size):
         # YOUR CODE HERE
