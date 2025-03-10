@@ -105,10 +105,10 @@ def sample_episode(env, policy):
         
         state = next_state
         
-    states = torch.tensor(states, dtype=torch.float)
-    actions = torch.tensor(actions, dtype=torch.int64)
-    rewards = torch.tensor(rewards, dtype=torch.float)
-    dones = torch.tensor(dones, dtype=torch.bool)    
+    states = torch.tensor(np.array(states), dtype=torch.float)
+    actions = torch.tensor(np.array(actions), dtype=torch.int64)
+    rewards = torch.tensor(np.array(rewards), dtype=torch.float)
+    dones = torch.tensor(np.array(dones), dtype=torch.bool)    
     
     return states, actions, rewards, dones
 
